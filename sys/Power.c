@@ -118,6 +118,7 @@ DsHidMini_EvtDevicePrepareHardware(
 	WDFUSBPIPE                              pipe;
 	WDF_USB_PIPE_INFORMATION                pipeInfo;
 	UCHAR									controlTransferBuffer[CONTROL_TRANSFER_BUFFER_LENGTH];
+	USB_DEVICE_DESCRIPTOR					deviceDescriptor;
 
 	UNREFERENCED_PARAMETER(ResourcesRaw);
 	UNREFERENCED_PARAMETER(ResourcesTranslated);
@@ -149,6 +150,11 @@ DsHidMini_EvtDevicePrepareHardware(
 	// 
 	if (pCtx->ConnectionType == DsDeviceConnectionTypeUsb)
 	{
+		WdfUsbTargetDeviceGetDeviceDescriptor(
+			pCtx->Connection.Usb.UsbDevice,
+			&deviceDescriptor
+		);
+		
 #pragma region USB Interface & Pipe settings
 
 		WDF_USB_DEVICE_SELECT_CONFIG_PARAMS_INIT_SINGLE_INTERFACE(&configParams);
@@ -215,55 +221,58 @@ DsHidMini_EvtDevicePrepareHardware(
 
 		if (NT_SUCCESS(status))
 		{
-			//
-			// Request device MAC address
-			// 
-			status = SendControlRequest(
-				pCtx,
-				BmRequestDeviceToHost,
-				BmRequestClass,
-				GetReport,
-				Ds3FeatureDeviceAddress,
-				0,
-				controlTransferBuffer,
-				CONTROL_TRANSFER_BUFFER_LENGTH);
-
-			if (!NT_SUCCESS(status))
+			if (deviceDescriptor.idVendor == 0x054C)
 			{
-				TraceEvents(TRACE_LEVEL_ERROR, TRACE_POWER,
-					"Requesting device address failed with %!STATUS!", status);
-				return status;
+				//
+				// Request device MAC address
+				// 
+				status = SendControlRequest(
+					pCtx,
+					BmRequestDeviceToHost,
+					BmRequestClass,
+					GetReport,
+					Ds3FeatureDeviceAddress,
+					0,
+					controlTransferBuffer,
+					CONTROL_TRANSFER_BUFFER_LENGTH);
+
+				if (!NT_SUCCESS(status))
+				{
+					TraceEvents(TRACE_LEVEL_ERROR, TRACE_POWER,
+					            "Requesting device address failed with %!STATUS!", status);
+					return status;
+				}
+
+				RtlCopyMemory(
+					&pCtx->DeviceAddress,
+					&controlTransferBuffer[4],
+					sizeof(BD_ADDR));
+
+				//
+				// Request host BTH address
+				// 
+				status = SendControlRequest(
+					pCtx,
+					BmRequestDeviceToHost,
+					BmRequestClass,
+					GetReport,
+					Ds3FeatureHostAddress,
+					0,
+					controlTransferBuffer,
+					CONTROL_TRANSFER_BUFFER_LENGTH);
+
+				if (!NT_SUCCESS(status))
+				{
+					TraceEvents(TRACE_LEVEL_ERROR, TRACE_POWER,
+					            "Requesting host address failed with %!STATUS!", status);
+					return status;
+				}
+
+				RtlCopyMemory(
+					&pCtx->HostAddress,
+					&controlTransferBuffer[2],
+					sizeof(BD_ADDR));
 			}
-
-			RtlCopyMemory(
-				&pCtx->DeviceAddress,
-				&controlTransferBuffer[4],
-				sizeof(BD_ADDR));
-
-			//
-			// Request host BTH address
-			// 
-			status = SendControlRequest(
-				pCtx,
-				BmRequestDeviceToHost,
-				BmRequestClass,
-				GetReport,
-				Ds3FeatureHostAddress,
-				0,
-				controlTransferBuffer,
-				CONTROL_TRANSFER_BUFFER_LENGTH);
-
-			if (!NT_SUCCESS(status))
-			{
-				TraceEvents(TRACE_LEVEL_ERROR, TRACE_POWER,
-					"Requesting host address failed with %!STATUS!", status);
-				return status;
-			}
-
-			RtlCopyMemory(
-				&pCtx->HostAddress,
-				&controlTransferBuffer[2],
-				sizeof(BD_ADDR));
 
 			//
 			// Send initial output report

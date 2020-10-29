@@ -21,27 +21,32 @@ typedef enum _DS_DEVICE_TYPE
     //
     // Unknown device type
     // 
-    DS_DEVICE_TYPE_UNKNOWN,
+    DsDeviceTypeUnknown,
 
     //
     // Sony DualShock 3 Controller
     // 
-    DS_DEVICE_TYPE_PS3_DUALSHOCK,
-
-    //
-    // Sony DualShock 4 Controller
-    // 
-    DS_DEVICE_TYPE_PS4_DUALSHOCK,
+    DsDeviceTypeSixaxis,
 
     //
     // Sony Navigation Controller
     // 
-    DS_DEVICE_TYPE_PS3_NAVIGATION,
+    DsDeviceTypeNavigation,
 
     //
     // Sony Motion Controller
     // 
-    DS_DEVICE_TYPE_PS3_MOTION
+    DsDeviceTypeMotion,
+
+	// 
+	// HORI CO.,LTD. Flightstick3
+	// 
+	DsDeviceTypeFlightstick3,
+
+	//
+    // Sony DualShock 4 Controller
+    // 
+    DsDeviceTypeWireless,
 
 } DS_DEVICE_TYPE, * PDS_DEVICE_TYPE;
 

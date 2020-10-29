@@ -1,0 +1,30 @@
+DriverEntry	2020/10/28-18:51:41.375	TRACE_LEVEL_INFORMATION	DriverEntry Entry
+DriverEntry	2020/10/28-18:51:41.375	TRACE_LEVEL_INFORMATION	DriverEntry Exit
+dshidminiEvtDeviceAdd	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	dshidminiEvtDeviceAdd Entry
+dshidminiCreateDevice	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	dshidminiCreateDevice Entry
+dshidminiCreateDevice	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	!! DEVPKEY_Device_InstanceId: USB\VID_0F0D&PID_0018\8&2c39633e&0&4
+DmfDeviceModulesAdd	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DmfDeviceModulesAdd Entry
+DmfDeviceModulesAdd	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DmfDeviceModulesAdd Exit
+DMF_DsHidMini_Create	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Create Entry
+DsConfig_Load	2020/10/28-18:51:41.376	TRACE_LEVEL_WARNING	Failed to load configuration
+DMF_DsHidMini_ChildModulesAdd	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_ChildModulesAdd Entry
+DMF_DsHidMini_ChildModulesAdd	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_ChildModulesAdd Exit
+DMF_DsHidMini_Create	2020/10/28-18:51:41.376	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Create Exit
+dshidminiCreateDevice	2020/10/28-18:51:41.377	TRACE_LEVEL_INFORMATION	dshidminiCreateDevice Exit
+dshidminiEvtDeviceAdd	2020/10/28-18:51:41.377	TRACE_LEVEL_INFORMATION	dshidminiEvtDeviceAdd Exit
+DMF_DsHidMini_Open	2020/10/28-18:51:41.378	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Open Entry
+DMF_DsHidMini_Open	2020/10/28-18:51:41.378	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Open Exit
+DsHidMini_EvtDevicePrepareHardware	2020/10/28-18:51:41.378	TRACE_LEVEL_INFORMATION	DsHidMini_EvtDevicePrepareHardware Entry
+DsHidMini_EvtDevicePrepareHardware	2020/10/28-18:51:41.380	TRACE_LEVEL_INFORMATION	InterruptWritePipe is 0xFFFFFED53E1474E8
+DsHidMini_EvtDevicePrepareHardware	2020/10/28-18:51:41.380	TRACE_LEVEL_INFORMATION	InterruptReadPipe is 0xFFFFFED53E14BF88
+DsUsbConfigContReaderForInterruptEndPoint	2020/10/28-18:51:41.380	TRACE_LEVEL_INFORMATION	DsUsbConfigContReaderForInterruptEndPoint Entry
+DsUsbConfigContReaderForInterruptEndPoint	2020/10/28-18:51:41.380	TRACE_LEVEL_INFORMATION	DsUsbConfigContReaderForInterruptEndPoint Exit
+SendControlRequest	2020/10/28-18:51:41.381	TRACE_LEVEL_ERROR	WdfUsbTargetDeviceSendControlTransferSynchronously failed with status STATUS_UNSUCCESSFUL (0xC0000001) (0)
+DsHidMini_EvtDevicePrepareHardware	2020/10/28-18:51:41.381	TRACE_LEVEL_ERROR	Requesting device address failed with STATUS_UNSUCCESSFUL (0xC0000001)
+DMF_Bridge_ModulePrepareHardware	2020/10/28-18:51:41.381	TRACE_LEVEL_ERROR	 [DMF_Bridge_ModulePrepareHardware]EvtDevicePrepareHardware fails: ntStatus=STATUS_UNSUCCESSFUL (0xC0000001)
+DMF_ModuleCollectionPrepareHardware	2020/10/28-18:51:41.381	TRACE_LEVEL_ERROR	 [DMF_ModuleCollectionPrepareHardware]ModulePrepareHardware dmfObject=0x0000012AC1EB4F60 ntStatus=STATUS_UNSUCCESSFUL (0xC0000001)
+DMF_ModuleCollectionCleanup	2020/10/28-18:51:41.381	TRACE_LEVEL_INFORMATION	 [DMF_ModuleCollectionCleanup]Cleanup (close) ModuleCollectionHandle=0x0000012AC1EB43E0 dmfObject=0x0000012AC1EB4550
+DMF_DsHidMini_Close	2020/10/28-18:51:41.381	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Close Entry
+DMF_DsHidMini_Close	2020/10/28-18:51:41.381	TRACE_LEVEL_INFORMATION	DMF_DsHidMini_Close Exit
+DmfContainerEvtDevicePrepareHardware	2020/10/28-18:51:41.381	TRACE_LEVEL_ERROR	 [DmfContainerEvtDevicePrepareHardware]DMF_ModuleCollectionPrepareHardware fails: ntStatus=STATUS_UNSUCCESSFUL (0xC0000001)
+dshidminiEvtDriverContextCleanup	2020/10/28-18:51:41.382	TRACE_LEVEL_INFORMATION	dshidminiEvtDriverContextCleanup Entry
